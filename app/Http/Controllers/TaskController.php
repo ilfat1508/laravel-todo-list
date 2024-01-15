@@ -17,11 +17,11 @@ class TaskController extends Controller
         $this->taskModel = $taskModel;
     }
 
-    public function delete($id)
+    public function delete($id, $project)
     {
-        $project = $this->taskModel->findorfail($id);
-        $project->delete();
-        return redirect('home');
+        $task  = $this->taskModel->findorfail($id);
+        $task->delete();
+        return redirect('project.show');
     }
 
     public function show($id)

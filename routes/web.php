@@ -29,6 +29,7 @@ Route::get('/project/show/{id}', 'ProjectController@show')->name('project.show')
 Route::post('/project', 'ProjectController@store')->name('project.store');
 
 Route::post('/task/{id}', 'TaskController@store')->name('task.store');
+Route::get('/task/delete/{taskId}/{projectId}', 'TaskController@delete')->name('task.delete');
 
 Route::get('/test', 'TestController@index');
 

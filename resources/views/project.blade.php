@@ -26,17 +26,17 @@
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link active" id="home-tab" data-bs-toggle="tab"
                                         data-bs-target="#home" type="button" role="tab" aria-controls="home"
-                                        aria-selected="true">Главная
+                                        aria-selected="true">All
                                 </button>
                             </li>
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile"
-                                        type="button" role="tab" aria-controls="profile" aria-selected="false">Профиль
+                                        type="button" role="tab" aria-controls="profile" aria-selected="false">Active
                                 </button>
                             </li>
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact"
-                                        type="button" role="tab" aria-controls="contact" aria-selected="false">Контакт
+                                        type="button" role="tab" aria-controls="contact" aria-selected="false">Completed
                                 </button>
                             </li>
                         </ul>
@@ -57,15 +57,15 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Заголовок модального окна</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                    <h5 class="modal-title" id="exampleModalLabel">Create a task</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <form action="{{route('task.store', $project->id)}}" method="post">
                     @csrf
                     <div class="modal-body">
 
                         <div class="mb-3">
-                            <label for="title" class="form-label">Название проекта</label>
+                            <label for="title" class="form-label">Title</label>
                             <input type="text" name="title" class="form-control" id="title">
                             @error('title')
                             <div class="text-danger">{{ $message }}</div>
@@ -80,7 +80,13 @@
                         </div>
                         <div class="mb-3">
                             <label for="status" class="form-label">Status</label>
-                            <input type="text" name="status" class="form-control" id="status">
+                            <select name="status" id="status" class="form-select">
+                                <option value="pending" selected>pending</option>
+                                <option value="in development">in development</option>
+                                <option value="on testing">on testing</option>
+                                <option value="on verification">on verification</option>
+                                <option value="completed">completed</option>
+                            </select>
                             @error('status')
                             <div class="text-danger">{{ $message }}</div>
                             @enderror

@@ -22,11 +22,11 @@
                     </select>
                 </td>
                 <td class="col-2">
-                    <button class="me-1 btn btn-primary" id="{{$task->id}}">
+                    <button class="me-1 btn btn-primary btn-sm" id="{{$task->id}}">
                         <i class="bi bi-info-circle"></i>
                     </button>
                     <a href="{{ route('task.delete', ['taskId' => $task->id, 'projectId' => $project->id]) }}">
-                        <button class="me-1 btn btn-outline-danger"
+                        <button class="me-1 btn btn-outline-danger btn-sm"
                                 id="{{$task->id}}">
                             <i class="bi bi-trash"></i>
                         </button>

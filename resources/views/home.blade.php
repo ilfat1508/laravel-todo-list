@@ -44,14 +44,20 @@
                                                 <tr>
                                                     <td class="col-5">{{$project->title}}</td>
                                                     <td class="col-5">{{$project->description}}</td>
-                                                    <td class="col-2">
+                                                    <td class="col-2" style="white-space: nowrap;">
                                                         <a href="{{route('project.show', $project->id)}}">
-                                                            <button class="me-1 btn btn-primary">
+                                                            <button class="me-1 btn btn-primary btn-sm">
                                                                 <i class="bi bi-info-circle"></i>
                                                             </button>
                                                         </a>
+                                                        <button class="me-1 btn btn-success btn-sm edit-project-btn"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#editProjectModal"
+                                                                data-project-id="{{$project->id}}">
+                                                            <i class="bi bi-pencil"></i>
+                                                        </button>
                                                         <a href="{{ route('project.delete', $project->id)}}">
-                                                            <button class="me-1 btn btn-outline-danger">
+                                                            <button class="me-1 btn btn-outline-danger btn-sm">
                                                                 <i class="bi bi-trash"></i>
                                                             </button>
                                                         </a>
@@ -76,33 +82,34 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Заголовок модального окна</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                    <h5 class="modal-title" id="exampleModalLabel">Create project</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
                 </div>
                 <form action="{{route('project.store')}}" method="post">
                     @csrf
                     <div class="modal-body">
-
                         <div class="mb-3">
-                            <label for="title" class="form-label">Название проекта</label>
+                            <label for="title" class="form-label">Project title</label>
                             <input type="text" name="title" class="form-control" id="title">
                             @error('title')
                             <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="description" class="form-label">Описание</label>
-                            <input type="text" name="description" class="form-control" id="description">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea type="text" name="description" class="form-control" id="description"></textarea>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
-                            <button type="submit" class="btn btn-primary">Отправить</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Create</button>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+
+    @include('project.editingModal')
 
     <script>
         // Добавляем скрипт после вашего кода HTML

@@ -49,4 +49,18 @@ class ProjectController extends Controller
 
         return redirect()->route('home');
     }
+
+    public function update($projectId)
+    {
+        $project = $this->projectsModel->findorfail($projectId);
+        $data = request()->validate([
+           'title' => 'string',
+           'description' => '',
+        ]);
+
+        $data['user_id'] = auth()->user()->id;
+        $project->update($data);
+
+        return redirect()->route('home');
+    }
 }

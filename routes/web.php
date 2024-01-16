@@ -25,6 +25,7 @@ Route::get('/', function () {
 
 Route::get('/project', 'ProjectController@index');
 Route::get('/project/delete/{id}', 'ProjectController@delete')->name('project.delete');
+Route::patch('/project/{id}', 'ProjectController@update')->name('project.update');
 Route::get('/project/show/{id}', 'ProjectController@show')->name('project.show');
 Route::post('/project', 'ProjectController@store')->name('project.store');
 

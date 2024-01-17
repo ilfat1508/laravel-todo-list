@@ -31,6 +31,7 @@ Route::post('/project', 'ProjectController@store')->name('project.store');
 
 Route::post('/task/{id}', 'TaskController@store')->name('task.store');
 Route::get('/task/delete/{taskId}/{projectId}', 'TaskController@delete')->name('task.delete');
+Route::patch('/task/{taskId}/{projectId}', 'TaskController@update')->name('task.update');
 
 Route::get('/test', 'TestController@index');
 

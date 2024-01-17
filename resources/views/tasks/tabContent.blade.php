@@ -22,8 +22,11 @@
                     </select>
                 </td>
                 <td class="col-2">
-                    <button class="me-1 btn btn-primary btn-sm" id="{{$task->id}}">
-                        <i class="bi bi-info-circle"></i>
+                    <button class="me-1 btn btn-success btn-sm edit-task-btn"
+                            data-bs-toggle="modal"
+                            data-bs-target="#editTaskModal"
+                            data-project-id="{{$task->id}}">
+                        <i class="bi bi-pencil"></i>
                     </button>
                     <a href="{{ route('task.delete', ['taskId' => $task->id, 'projectId' => $project->id]) }}">
                         <button class="me-1 btn btn-outline-danger btn-sm"
@@ -37,3 +40,5 @@
     @endif
     </tbody>
 </table>
+
+@include('tasks.editingModal')

@@ -12,18 +12,30 @@ class TaskController extends Controller
      */
     private $taskModel;
 
+    /**
+     * @param Task $taskModel
+     */
     public function __construct(Task $taskModel)
     {
         $this->taskModel = $taskModel;
     }
 
-    public function delete($id, $projectId)
+    /**
+     * @param $id
+     * @param $projectId
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function delete($taskId, $projectId)
     {
-        $task  = $this->taskModel->findorfail($id);
+        $task  = $this->taskModel->findorfail($taskId);
         $task->delete();
         return redirect(route('project.show', $projectId));
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function show($id)
     {
         $project = $this->taskModel->findorfail($id);
@@ -31,7 +43,11 @@ class TaskController extends Controller
         return view('project', ['project' => $project, 'tasks' => $tasks]);
     }
 
-    public function store($id)
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function store($projectId)
     {
         $data = request()->validate([
             'title' => 'string',
@@ -39,9 +55,27 @@ class TaskController extends Controller
             'status' => 'string',
         ]);
 
-        $data['project_id'] = $id;
+        $data['project_id'] = $projectId;
         $this->taskModel->create($data);
 
-        return redirect()->route('project.show', $id);
+        return redirect()->route('project.show', $projectId);
+    }
+
+    /**
+     * @param $projectId
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update($taskId, $projectId)
+    {
+        $task = $this->taskModel->findorfail($taskId);
+        $data = request()->validate([
+            'title' => 'string',
+            'description' => 'string',
+            'status' => 'string',
+        ]);
+
+        $task->update($data);
+
+        return redirect()->route('project.show', $projectId);
     }
 }

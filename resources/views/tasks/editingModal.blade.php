@@ -6,7 +6,7 @@
                 <h5 class="modal-title">Edit task</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
             </div>
-            <form id="editTaskForm" action="{{route('task.update', ['taskId' => $task->id, 'projectId' => $project->id])}}" method="post">
+            <form id="editTaskForm" action="{{route('task.update', [':taskId', 'projectId' => $project->id])}}" method="post">
                 @csrf
                 @method('patch')
                 <div class="modal-body">
@@ -21,7 +21,7 @@
                         <label for="description" class="form-label">Description</label>
                         <textarea type="text" name="description" class="form-control" id="description">{{$task->description}}</textarea>
                     </div>
-                    <select name="status" class="form-select">
+                    <select name="status" class="form-select" id="status">
                         @foreach(['pending', 'in development', 'on testing', 'on verification', 'completed'] as $status)
                             <option value="{{ $status }}" {{ old('status', $task->status) == $status ? 'selected' : '' }}>
                                 {{ $status }}
@@ -42,12 +42,20 @@
     document.addEventListener('DOMContentLoaded', function () {
         let editTaskButtons = document.querySelectorAll('.edit-task-btn');
         let form = document.getElementById('editTaskForm');
-        debugger
-        editProjectButtons.forEach(function (button) {
+        let titleInput = document.getElementById('title');
+        let descriptionInput = document.getElementById('description');
+        let statusSelect = document.getElementById('status');
+
+        editTaskButtons.forEach(function (button) {
             button.addEventListener('click', function () {
                 let taskId = button.getAttribute('data-task-id');
-                form.action = form.action.replace(':id', taskId);
-                debugger
+                let taskTitle = button.getAttribute('data-task-title');
+                let taskDescription = button.getAttribute('data-task-description');
+                let taskStatus = button.getAttribute('data-task-status');
+                form.action = form.action.replace(':taskId', taskId);
+                titleInput.value = taskTitle;
+                descriptionInput.value = taskDescription;
+                statusSelect.value = taskStatus;
             });
         });
     });

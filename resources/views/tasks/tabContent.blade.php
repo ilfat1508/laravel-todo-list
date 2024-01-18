@@ -13,7 +13,7 @@
                 <td class="col-4">{{$task->title}}</td>
                 <td class="col-4">{{$task->description}}</td>
                 <td class="col-2">
-                    <select class="form-select">
+                    <select class="form-select" id="statusSelect" data-task-id="{{ $task->id }}" data-project-id="{{ $project->id }}">
                         @foreach(['pending', 'in development', 'on testing', 'on verification', 'completed'] as $status)
                             <option value="{{ $status }}" {{ old('status', $task->status) == $status ? 'selected' : '' }}>
                                 {{ $status }}
@@ -25,7 +25,10 @@
                     <button class="me-1 btn btn-success btn-sm edit-task-btn"
                             data-bs-toggle="modal"
                             data-bs-target="#editTaskModal"
-                            data-project-id="{{$task->id}}">
+                            data-task-id="{{$task->id}}"
+                            data-task-title="{{$task->title}}"
+                            data-task-description="{{$task->description}}"
+                            data-task-status="{{$task->status}}">
                         <i class="bi bi-pencil"></i>
                     </button>
                     <a href="{{ route('task.delete', ['taskId' => $task->id, 'projectId' => $project->id]) }}">

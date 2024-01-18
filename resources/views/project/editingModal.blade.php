@@ -35,12 +35,10 @@
     document.addEventListener('DOMContentLoaded', function () {
         let editProjectButtons = document.querySelectorAll('.edit-project-btn');
         let form = document.getElementById('editProjectForm');
-        debugger
         editProjectButtons.forEach(function (button) {
             button.addEventListener('click', function () {
                 let projectId = button.getAttribute('data-project-id');
                 form.action = form.action.replace(':id', projectId);
-                debugger
             });
         });
     });

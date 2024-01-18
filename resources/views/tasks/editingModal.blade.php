@@ -12,18 +12,18 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="title" class="form-label">Task title</label>
-                        <input type="text" name="title" class="form-control" value="{{$task->title}}" id="title">
+                        <input type="text" name="title" class="form-control" id="title">
                         @error('title')
                         <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="mb-3">
                         <label for="description" class="form-label">Description</label>
-                        <textarea type="text" name="description" class="form-control" id="description">{{$task->description}}</textarea>
+                        <textarea type="text" name="description" class="form-control" id="description"></textarea>
                     </div>
                     <select name="status" class="form-select" id="status">
                         @foreach(['pending', 'in development', 'on testing', 'on verification', 'completed'] as $status)
-                            <option value="{{ $status }}" {{ old('status', $task->status) == $status ? 'selected' : '' }}>
+                            <option value="{{ $status }}" >
                                 {{ $status }}
                             </option>
                         @endforeach
@@ -45,6 +45,7 @@
         let titleInput = document.getElementById('title');
         let descriptionInput = document.getElementById('description');
         let statusSelect = document.getElementById('status');
+        const originalFormAction = form.getAttribute('action');
 
         editTaskButtons.forEach(function (button) {
             button.addEventListener('click', function () {
@@ -52,6 +53,7 @@
                 let taskTitle = button.getAttribute('data-task-title');
                 let taskDescription = button.getAttribute('data-task-description');
                 let taskStatus = button.getAttribute('data-task-status');
+                form.setAttribute('action', originalFormAction);
                 form.action = form.action.replace(':taskId', taskId);
                 titleInput.value = taskTitle;
                 descriptionInput.value = taskDescription;

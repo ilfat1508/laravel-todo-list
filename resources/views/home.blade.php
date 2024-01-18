@@ -53,7 +53,10 @@
                                                         <button class="me-1 btn btn-success btn-sm edit-project-btn"
                                                                 data-bs-toggle="modal"
                                                                 data-bs-target="#editProjectModal"
-                                                                data-project-id="{{$project->id}}">
+                                                                data-project-id="{{$project->id}}"
+                                                                data-project-title="{{$project->title}}"
+                                                                data-project-description="{{$project->description}}"
+                                                        >
                                                             <i class="bi bi-pencil"></i>
                                                         </button>
                                                         <a href="{{ route('project.delete', $project->id)}}">

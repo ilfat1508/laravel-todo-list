@@ -5,7 +5,7 @@
     <div class="container">
         <h3>{{'Project: '   . $project->title}}</h3>
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">{{ __('Tasks') }}
                         <button class="btn btn-success btn-sm" id="createTaskModalButton" data-bs-toggle="modal"

@@ -26,14 +26,13 @@ Route::get('/', function () {
 Route::get('/project', 'ProjectController@index');
 Route::get('/project/delete/{id}', 'ProjectController@delete')->name('project.delete');
 Route::patch('/project/{id}', 'ProjectController@update')->name('project.update');
-Route::get('/project/show/{id}', 'ProjectController@show')->name('project.show');
+Route::get('/project/show/{id}/{tasksStatus?}', 'ProjectController@show')->name('project.show');
 Route::post('/project', 'ProjectController@store')->name('project.store');
 
 Route::post('/task/{id}', 'TaskController@store')->name('task.store');
 Route::get('/task/delete/{taskId}/{projectId}', 'TaskController@delete')->name('task.delete');
-Route::patch('/task/{taskId}/{projectId}', 'TaskController@update')->name('task.update');
+Route::patch('/task/{taskId}/{projectId}/{tasksStatus?}', 'TaskController@update')->name('task.update');
 
-Route::get('/test', 'TestController@index');
 
 Auth::routes();
 

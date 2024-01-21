@@ -1,4 +1,4 @@
-<table class="table table-striped">
+<table class="table table-striped tasks-table">
     <thead>
     <tr>
         <th>ID</th>

@@ -6,7 +6,9 @@
                 <h5 class="modal-title">Edit task</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
             </div>
-            <form id="editTaskForm" action="{{route('task.update', [':taskId', 'projectId' => $project->id])}}" method="post">
+            <form id="editTaskForm"
+                  action="{{route('task.update', [':taskId', 'projectId' => $project->id, 'tasksStatus' => $tasksStatus])}}"
+                  method="post">
                 @csrf
                 @method('patch')
                 <div class="modal-body">

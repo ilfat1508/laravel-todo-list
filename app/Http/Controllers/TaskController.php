@@ -65,7 +65,7 @@ class TaskController extends Controller
      * @param $projectId
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update($taskId, $projectId)
+    public function update($taskId, $projectId, $tasksStatus = null)
     {
         $task = $this->taskModel->findorfail($taskId);
         $data = request()->validate([
@@ -76,6 +76,6 @@ class TaskController extends Controller
 
         $task->update($data);
 
-        return redirect()->route('project.show', $projectId);
+        return redirect()->route('project.show', [$projectId, $tasksStatus]);
     }
 }

@@ -1,8 +1,7 @@
-
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+        <div class="container project-container" data-tasks-status="{{ $tasksStatus ? $tasksStatus : '' }}">
         <h3>{{'Project: '   . $project->title}}</h3>
         <div class="row justify-content-center">
             <div class="col-md-12">
@@ -22,27 +21,59 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <ul class="nav tasks-nav-list nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link active" id="home-tab" data-bs-toggle="tab"
-                                        data-bs-target="#home" type="button" role="tab" aria-controls="home"
-                                        aria-selected="true">All
+                                <button class="nav-link @if($tasksStatus === 'all' || $tasksStatus === null) active @endif"
+                                        id="all-tab"
+                                        data-bs-toggle="tab"
+                                        data-bs-target="#all"
+                                        data-project-id="{{$project->id}}"
+                                        type="button"
+                                        role="tab"
+                                        data-status="all"
+                                        aria-controls="all"
+                                        aria-selected="true">
+                                    All
                                 </button>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile"
-                                        type="button" role="tab" aria-controls="profile" aria-selected="false">Active
+                                <button class="nav-link @if($tasksStatus === 'active') active @endif"
+                                        id="active-tab"
+                                        data-bs-toggle="tab"
+                                        data-project-id="{{$project->id}}"
+                                        data-bs-target="#active"
+                                        data-status="active"
+                                        type="button"
+                                        role="tab"
+                                        aria-controls="active"
+                                        aria-selected="false">
+                                    Active
                                 </button>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact"
-                                        type="button" role="tab" aria-controls="contact" aria-selected="false">Completed
+                                <button class="nav-link @if($tasksStatus === 'completed') active @endif"
+                                        id="completed-tab"
+                                        data-bs-toggle="tab"
+                                        data-status="completed"
+                                        data-project-id="{{$project->id}}"
+                                        data-bs-target="#completed"
+                                        type="button"
+                                        role="tab"
+                                        aria-controls="completed"
+                                        aria-selected="false">
+                                    Completed
                                 </button>
                             </li>
                         </ul>
                         <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                               @include('tasks.tabContent')
+                            <div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
+                                @include('tasks.tabContent')
+                            </div>
+                            <div class="tab-pane fade" id="active" role="tabpanel" aria-labelledby="active-tab">
+                                @include('tasks.tabContent')
+                            </div>
+                            <div class="tab-pane fade" id="completed" role="tabpanel" aria-labelledby="completed-tab">
+                                @include('tasks.tabContent')
                             </div>
                         </div>
                     </div>

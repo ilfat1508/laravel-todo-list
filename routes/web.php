@@ -33,6 +33,7 @@ Route::post('/task/{id}', 'TaskController@store')->name('task.store');
 Route::get('/task/delete/{taskId}/{projectId}', 'TaskController@delete')->name('task.delete');
 Route::patch('/task/{taskId}/{projectId}/{tasksStatus?}', 'TaskController@update')->name('task.update');
 
+Route::delete('/user/{id}', 'UserController@delete')->name('user.destroy');
 
 Auth::routes();
 

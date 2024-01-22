@@ -90,7 +90,6 @@ class ProjectController extends Controller
             'description' => '',
         ]);
 
-        $data['user_id'] = auth()->user()->id;
         $project->update($data);
 
         return redirect()->route('home');

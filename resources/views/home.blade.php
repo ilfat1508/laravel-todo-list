@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+    @if(auth()->user()->role === 'admin')
+        @include('users.container')
+    @endif
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -33,6 +36,7 @@
                                     <table class="table table-striped">
                                         <thead>
                                         <tr>
+                                            <th>Id</th>
                                             <th>Title</th>
                                             <th>Description</th>
                                             <th>Actions</th>
@@ -42,6 +46,7 @@
                                         @if(isset($projects))
                                             @foreach($projects as $project)
                                                 <tr>
+                                                    <td class="col-5">{{$project->id}}</td>
                                                     <td class="col-5">{{$project->title}}</td>
                                                     <td class="col-5">{{$project->description}}</td>
                                                     <td class="col-2" style="white-space: nowrap;">

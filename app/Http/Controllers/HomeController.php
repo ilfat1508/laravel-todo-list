@@ -39,8 +39,17 @@ class HomeController extends Controller
     {
         $user = auth()->user();
 
-        $projects = $user->projects;
+        if ($user->role === 'admin') {
+            $users = User::where('id', '!=', $user->id)->get();
+            $projects = Project::all();
+        } else {
+            $projects = $user->projects;
+        }
 
-        return view('home', ['projects' => $projects]);
+        return view('home', [
+            'projects' => $projects,
+            'users' => isset($users) ? $users : null,
+            'userRole' => $user->role
+        ]);
     }
 }

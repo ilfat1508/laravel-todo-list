@@ -53,9 +53,14 @@
                                                             onclick="deleteUser({{ $user->id }})">
                                                         <i class="bi bi-trash"></i>
                                                     </button>
-                                                    <button class="me-1 btn btn-outline-danger btn-sm"
+                                                    <button class="me-1 btn btn-sm
+                                                    {{$user->blocked ? 'btn-outline-danger' : 'btn-outline-success'}}"
                                                             onclick="blockUser({{ $user->id }})">
-                                                        <i class="bi bi-lock-fill"></i>
+                                                        @if($user->blocked)
+                                                            <i class="bi bi-lock-fill"></i>
+                                                        @else
+                                                            <i class="bi bi-unlock-fill"></i>
+                                                        @endif
                                                     </button>
                                                 </td>
                                             </tr>
@@ -72,23 +77,28 @@
     </div>
 </div>
 
-<form id="user-action-form" action="" method="POST" style="display: none;">
+<form id="user-delete-form" action="" method="POST" style="display: none;">
     @csrf
     @method('DELETE')
-    <input type="hidden" name="user_id" id="user-id-input">
+    <input type="hidden" name="user_id" id="delete-user-id-input">
+</form>
+
+<form id="user-block-form" action="" method="POST" style="display: none;">
+    @csrf
+    @method('PATCH')
+    <input type="hidden" name="user_id" id="block-user-id-input">
 </form>
 
 <script>
     function deleteUser(userId) {
-        document.getElementById('user-id-input').value = userId;
-        document.getElementById('user-action-form').action = "{{ route('user.destroy', '') }}" + '/' + userId;
-        document.getElementById('user-action-form').submit();
+        document.getElementById('delete-user-id-input').value = userId;
+        document.getElementById('user-delete-form').action = "{{ route('user.destroy', '') }}" + '/' + userId;
+        document.getElementById('user-delete-form').submit();
     }
 
     function blockUser(userId) {
-        // Аналогично для блокировки пользователя
-        document.getElementById('user-id-input').value = userId;
-        document.getElementById('user-action-form').action = "{{ route('user.lock', '') }}" + '/' + userId;
-        document.getElementById('user-action-form').submit();
+        document.getElementById('block-user-id-input').value = userId;
+        document.getElementById('user-block-form').action = "{{ route('user.update', '') }}" + '/' + userId;
+        document.getElementById('user-block-form').submit();
     }
 </script>

@@ -19,4 +19,12 @@ class UserController extends Controller
         $user->delete();
         return redirect('home');
     }
+
+    public function update($userId)
+    {
+        $user = $this->userModel->findorfail($userId);
+        $user->blocked = !$user->blocked;
+        $user->save();
+        return redirect('home');
+    }
 }

@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -26,5 +26,10 @@ class UserController extends Controller
         $user->blocked = !$user->blocked;
         $user->save();
         return redirect('home');
+    }
+
+    public function blocked()
+    {
+        return view('blocked');
     }
 }

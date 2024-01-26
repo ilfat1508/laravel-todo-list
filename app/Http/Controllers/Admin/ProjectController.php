@@ -70,6 +70,8 @@ class ProjectController extends Controller
         $data = request()->validate([
             'title' => 'string',
             'description' => '',
+        ], [
+            'string' => 'This is a required field'
         ]);
 
         $data['user_id'] = auth()->user()->id;
@@ -88,7 +90,8 @@ class ProjectController extends Controller
         $data = request()->validate([
             'title' => 'string',
             'description' => '',
-        ]);
+        ],
+        ['string' => 'This is a required field']);
 
         $project->update($data);
 

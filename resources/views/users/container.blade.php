@@ -54,12 +54,12 @@
                                                         <i class="bi bi-trash"></i>
                                                     </button>
                                                     <button class="me-1 btn btn-sm
-                                                    {{$user->blocked ? 'btn-outline-danger' : 'btn-outline-success'}}"
+                                                    {{$user->blocked ? 'btn-outline-success' : 'btn-outline-danger'}}"
                                                             onclick="blockUser({{ $user->id }})">
                                                         @if($user->blocked)
-                                                            <i class="bi bi-lock-fill"></i>
-                                                        @else
                                                             <i class="bi bi-unlock-fill"></i>
+                                                        @else
+                                                            <i class="bi bi-lock-fill"></i>
                                                         @endif
                                                     </button>
                                                 </td>

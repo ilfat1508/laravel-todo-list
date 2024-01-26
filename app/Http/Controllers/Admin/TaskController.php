@@ -53,6 +53,8 @@ class TaskController extends Controller
             'title' => 'string',
             'description' => 'string',
             'status' => 'string',
+        ], [
+            'string' => 'This is a required field',
         ]);
 
         $data['project_id'] = $projectId;
@@ -70,9 +72,8 @@ class TaskController extends Controller
         $task = $this->taskModel->findorfail($taskId);
         $data = request()->validate([
             'title' => 'string',
-            'description' => 'string',
             'status' => 'string',
-        ]);
+        ], ['string' => 'This is a required field']);
 
         $task->update($data);
 

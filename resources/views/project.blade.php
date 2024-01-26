@@ -138,9 +138,9 @@
         document.addEventListener('DOMContentLoaded', function () {
             // Проверяем, есть ли ошибки валидации при загрузке страницы
             let hasTitleError = @json($errors->has('title'));
+            let hasDescriptionError = @json($errors->has('description'));
 
-            // Если есть ошибки, показываем модальное окно
-            if (hasTitleError) {
+            if (hasTitleError, hasDescriptionError) {
                 let createProjectButton = document.getElementById('createTaskModalButton');
                 createProjectButton.click();
             }

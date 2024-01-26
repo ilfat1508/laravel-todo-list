@@ -4,10 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class UserController extends Controller
 {
+    use SoftDeletes;
     private $userModel;
+
     public function __construct(User $userModel)
     {
         $this->userModel = $userModel;

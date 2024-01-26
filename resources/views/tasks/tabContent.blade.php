@@ -23,7 +23,7 @@
                         @endforeach
                     </select>
                 </td>
-                <td class="col-2">
+                <td class="col-2" style="white-space: nowrap">
                     <button class="me-1 btn btn-success btn-sm edit-task-btn"
                             data-bs-toggle="modal"
                             data-bs-target="#editTaskModal"
